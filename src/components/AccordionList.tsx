@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Sparkles, Palette, Zap, Eye } from "lucide-react";
+import { MousePointerClick, Layers, Hand, Send, Radio } from "lucide-react";
 
 interface AccordionItem {
   id: string;
@@ -11,39 +11,39 @@ interface AccordionItem {
 
 const items: AccordionItem[] = [
   {
-    id: "mission",
-    icon: <Heart className="w-5 h-5 text-muted-foreground" />,
-    title: "What is LoveUX?",
+    id: "interaction",
+    icon: <MousePointerClick className="w-5 h-5 text-muted-foreground" />,
+    title: "What is Interaction Design?",
     description:
-      "LoveUX is a design philosophy that puts empathy at the core of every interaction, crafting digital experiences people genuinely enjoy using.",
+      "Interaction design focuses on creating engaging interfaces with well-thought-out behaviors, making the experience intuitive and delightful.",
   },
   {
-    id: "emotion",
-    icon: <Sparkles className="w-5 h-5 text-muted-foreground" />,
-    title: "Emotional Design",
+    id: "principles",
+    icon: <Layers className="w-5 h-5 text-muted-foreground" />,
+    title: "Principles & Patterns",
     description:
-      "We believe great UX goes beyond usability — it sparks delight, builds trust, and creates meaningful emotional connections with users.",
+      "Design principles provide a foundation of best practices, while patterns offer reusable solutions to common interaction challenges.",
   },
   {
-    id: "system",
-    icon: <Palette className="w-5 h-5 text-muted-foreground" />,
-    title: "Design Systems",
+    id: "accessibility",
+    icon: <Hand className="w-5 h-5 text-muted-foreground" />,
+    title: "Usability & Accessibility",
     description:
-      "Scalable, consistent, and beautiful. Our design systems ensure every component speaks the same visual language across your product.",
+      "Focusing on making digital designs easy to use and accessible for everyone, including those with disabilities.",
   },
   {
-    id: "micro",
-    icon: <Zap className="w-5 h-5 text-muted-foreground" />,
-    title: "Micro-interactions",
+    id: "prototyping",
+    icon: <Send className="w-5 h-5 text-muted-foreground" />,
+    title: "Prototyping & Testing",
     description:
-      "The tiny moments that make a product feel alive — hover states, transitions, loading animations, and feedback loops that users love.",
+      "Building interactive prototypes to validate ideas early, gather feedback, and iterate toward a polished final product.",
   },
   {
-    id: "research",
-    icon: <Eye className="w-5 h-5 text-muted-foreground" />,
-    title: "User Research",
+    id: "optimisation",
+    icon: <Radio className="w-5 h-5 text-muted-foreground" />,
+    title: "UX Optimisation",
     description:
-      "Data-driven empathy. We combine qualitative interviews with quantitative analytics to uncover what users truly need.",
+      "Continuously refining the user experience through data analysis, A/B testing, and user research to maximise engagement.",
   },
 ];
 
@@ -68,104 +68,82 @@ export default function AccordionList() {
     setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <div className="w-full max-w-md mx-auto relative">
-      {/* SVG gooey filter */}
-      <svg className="absolute w-0 h-0" aria-hidden="true">
-        <defs>
-          <filter id="gooey">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
-            <feColorMatrix
-              in="blur"
-              type="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-              result="goo"
-            />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-        </defs>
-      </svg>
-
-      <div
-        className="flex flex-col gap-[3px]"
-        style={{ filter: "url(#gooey)" }}
-      >
-        {items.map((item) => {
-          const isOpen = openId === item.id;
-          return (
-            <motion.div
-              key={item.id}
-              layout
-              transition={spring}
-              className="rounded-2xl bg-card overflow-hidden"
-              style={{ isolation: "isolate" }}
+    <div className="w-full max-w-md mx-auto flex flex-col gap-2">
+      {items.map((item) => {
+        const isOpen = openId === item.id;
+        return (
+          <motion.div
+            key={item.id}
+            layout
+            transition={spring}
+            className="rounded-2xl bg-card overflow-hidden shadow-sm"
+          >
+            <button
+              onClick={() => toggle(item.id)}
+              className="w-full flex items-center gap-3 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <button
-                onClick={() => toggle(item.id)}
-                className="w-full flex items-center gap-3 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              <span className="flex-shrink-0">{item.icon}</span>
+              <span className="flex-1 text-[15px] font-semibold text-foreground tracking-tight">
+                {item.title}
+              </span>
+              <motion.span
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={spring}
+                className="flex-shrink-0 text-muted-foreground"
               >
-                <span className="flex-shrink-0">{item.icon}</span>
-                <span className="flex-1 text-[15px] font-semibold text-foreground tracking-tight">
-                  {item.title}
-                </span>
-                <motion.span
-                  animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={spring}
-                  className="flex-shrink-0 text-muted-foreground"
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </motion.span>
-              </button>
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </motion.span>
+            </button>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={spring}
-                    className="overflow-hidden"
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={spring}
+                  className="overflow-hidden"
+                >
+                  <motion.p
+                    initial={{ y: 8, opacity: 0, filter: "blur(4px)" }}
+                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                    exit={{ y: -4, opacity: 0, filter: "blur(4px)" }}
+                    transition={{ ...textSpring, delay: 0.05 }}
+                    className="px-5 pb-4 pt-0 text-[14px] leading-relaxed text-muted-foreground"
                   >
-                    <motion.p
-                      initial={{ y: 8, opacity: 0, filter: "blur(4px)" }}
-                      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                      exit={{ y: -4, opacity: 0, filter: "blur(4px)" }}
-                      transition={{ ...textSpring, delay: 0.05 }}
-                      className="px-5 pb-4 pt-0 text-[14px] leading-relaxed text-muted-foreground"
-                    >
-                      {item.description.split(" ").map((word, i) => (
-                        <motion.span
-                          key={i}
-                          initial={{ opacity: 0, y: 6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            ...textSpring,
-                            delay: 0.04 + i * 0.018,
-                          }}
-                          className="inline-block mr-[0.25em]"
-                        >
-                          {word}
-                        </motion.span>
-                      ))}
-                    </motion.p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
-      </div>
+                    {item.description.split(" ").map((word, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          ...textSpring,
+                          delay: 0.04 + i * 0.018,
+                        }}
+                        className="inline-block mr-[0.25em]"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
