@@ -49,9 +49,16 @@ const items: AccordionItem[] = [
 
 const spring = {
   type: "spring" as const,
-  stiffness: 180,
-  damping: 14,
+  stiffness: 120,
+  damping: 10,
   mass: 0.8,
+};
+
+const textSpring = {
+  type: "spring" as const,
+  stiffness: 100,
+  damping: 12,
+  mass: 0.6,
 };
 
 export default function AccordionList() {
