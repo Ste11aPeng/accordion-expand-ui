@@ -49,8 +49,8 @@ const items: AccordionItem[] = [
 
 const spring = {
   type: "spring" as const,
-  stiffness: 300,
-  damping: 24,
+  stiffness: 180,
+  damping: 14,
   mass: 0.8,
 };
 
