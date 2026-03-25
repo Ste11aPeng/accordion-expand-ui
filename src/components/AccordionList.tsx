@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Wifi, Layers, Hand, Send, Radio } from "lucide-react";
+import { MousePointerClick, Layers, Hand, Send, Radio } from "lucide-react";
 
 interface AccordionItem {
   id: string;
@@ -12,7 +12,7 @@ interface AccordionItem {
 const items: AccordionItem[] = [
   {
     id: "interaction",
-    icon: <Wifi className="w-5 h-5 text-muted-foreground" />,
+    icon: <MousePointerClick className="w-5 h-5 text-muted-foreground" />,
     title: "What is Interaction Design?",
     description:
       "Interaction design focuses on creating engaging interfaces with well-thought-out behaviors, making the experience intuitive and delightful.",
@@ -49,8 +49,8 @@ const items: AccordionItem[] = [
 
 const spring = {
   type: "spring" as const,
-  stiffness: 300,
-  damping: 24,
+  stiffness: 180,
+  damping: 14,
   mass: 0.8,
 };
 
