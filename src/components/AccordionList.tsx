@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Wifi, Layers, Hand, Send, Radio } from "lucide-react";
+import { MousePointerClick, Layers, Hand, Send, Radio } from "lucide-react";
 
 interface AccordionItem {
   id: string;
