@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MousePointerClick, Layers, Hand, Send, Radio } from "lucide-react";
+import { Eye, Clock, Fingerprint, Target, Sparkles } from "lucide-react";
 
 interface AccordionItem {
   id: string;
@@ -11,39 +11,39 @@ interface AccordionItem {
 
 const items: AccordionItem[] = [
   {
-    id: "interaction",
-    icon: <MousePointerClick className="w-5 h-5 text-muted-foreground" />,
-    title: "What is Interaction Design?",
+    id: "hick",
+    icon: <Clock className="w-5 h-5 text-muted-foreground" />,
+    title: "Hick's Law",
     description:
-      "Interaction design focuses on creating engaging interfaces with well-thought-out behaviors, making the experience intuitive and delightful.",
+      "The time it takes to make a decision increases with the number and complexity of choices available. Simplify choices to improve response time.",
   },
   {
-    id: "principles",
-    icon: <Layers className="w-5 h-5 text-muted-foreground" />,
-    title: "Principles & Patterns",
+    id: "fitts",
+    icon: <Target className="w-5 h-5 text-muted-foreground" />,
+    title: "Fitts's Law",
     description:
-      "Design principles provide a foundation of best practices, while patterns offer reusable solutions to common interaction challenges.",
+      "The time to acquire a target is a function of the distance to and size of the target. Make important actions large and place them close to users.",
   },
   {
-    id: "accessibility",
-    icon: <Hand className="w-5 h-5 text-muted-foreground" />,
-    title: "Usability & Accessibility",
+    id: "miller",
+    icon: <Sparkles className="w-5 h-5 text-muted-foreground" />,
+    title: "Miller's Law",
     description:
-      "Focusing on making digital designs easy to use and accessible for everyone, including those with disabilities.",
+      "The average person can only keep about 7 (±2) items in their working memory. Chunk information into manageable groups.",
   },
   {
-    id: "prototyping",
-    icon: <Send className="w-5 h-5 text-muted-foreground" />,
-    title: "Prototyping & Testing",
+    id: "jacob",
+    icon: <Eye className="w-5 h-5 text-muted-foreground" />,
+    title: "Jakob's Law",
     description:
-      "Building interactive prototypes to validate ideas early, gather feedback, and iterate toward a polished final product.",
+      "Users spend most of their time on other sites. They prefer your site to work the same way as all the other sites they already know.",
   },
   {
-    id: "optimisation",
-    icon: <Radio className="w-5 h-5 text-muted-foreground" />,
-    title: "UX Optimisation",
+    id: "gestalt",
+    icon: <Fingerprint className="w-5 h-5 text-muted-foreground" />,
+    title: "Law of Proximity",
     description:
-      "Continuously refining the user experience through data analysis, A/B testing, and user research to maximise engagement.",
+      "Objects that are near each other tend to be grouped together. Proximity helps create relationships between elements and organise content.",
   },
 ];
 
@@ -68,82 +68,103 @@ export default function AccordionList() {
     setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <div className="w-full max-w-md mx-auto flex flex-col gap-2">
-      {items.map((item) => {
-        const isOpen = openId === item.id;
-        return (
-          <motion.div
-            key={item.id}
-            layout
-            transition={spring}
-            className="rounded-2xl bg-card overflow-hidden shadow-sm"
-          >
-            <button
-              onClick={() => toggle(item.id)}
-              className="w-full flex items-center gap-3 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <span className="flex-shrink-0">{item.icon}</span>
-              <span className="flex-1 text-[15px] font-semibold text-foreground tracking-tight">
-                {item.title}
-              </span>
-              <motion.span
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={spring}
-                className="flex-shrink-0 text-muted-foreground"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </motion.span>
-            </button>
+    <>
+      {/* SVG filter for gooey/liquid effect */}
+      <svg className="absolute w-0 h-0" aria-hidden="true">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+              result="goo"
+            />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+        </defs>
+      </svg>
 
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  key="content"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
+      <div
+        className="w-full max-w-md mx-auto flex flex-col gap-2"
+        style={{ filter: "url(#goo)" }}
+      >
+        {items.map((item) => {
+          const isOpen = openId === item.id;
+          return (
+            <motion.div
+              key={item.id}
+              layout
+              transition={spring}
+              className="rounded-2xl bg-card overflow-hidden shadow-sm"
+            >
+              <button
+                onClick={() => toggle(item.id)}
+                className="w-full flex items-center gap-3 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <span className="flex-shrink-0">{item.icon}</span>
+                <span className="flex-1 text-[15px] font-semibold text-foreground tracking-tight">
+                  {item.title}
+                </span>
+                <motion.span
+                  animate={{ rotate: isOpen ? 180 : 0 }}
                   transition={spring}
-                  className="overflow-hidden"
+                  className="flex-shrink-0 text-muted-foreground"
                 >
-                  <motion.p
-                    initial={{ y: 8, opacity: 0, filter: "blur(4px)" }}
-                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                    exit={{ y: -4, opacity: 0, filter: "blur(4px)" }}
-                    transition={{ ...textSpring, delay: 0.05 }}
-                    className="px-5 pb-4 pt-0 text-[14px] leading-relaxed text-muted-foreground"
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    {item.description.split(" ").map((word, i) => (
-                      <motion.span
-                        key={i}
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          ...textSpring,
-                          delay: 0.04 + i * 0.018,
-                        }}
-                        className="inline-block mr-[0.25em]"
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        );
-      })}
-    </div>
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </motion.span>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={spring}
+                    className="overflow-hidden"
+                  >
+                    <motion.p
+                      initial={{ y: 8, opacity: 0, filter: "blur(4px)" }}
+                      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                      exit={{ y: -4, opacity: 0, filter: "blur(4px)" }}
+                      transition={{ ...textSpring, delay: 0.05 }}
+                      className="px-5 pb-4 pt-0 text-[14px] leading-relaxed text-muted-foreground"
+                    >
+                      {item.description.split(" ").map((word, i) => (
+                        <motion.span
+                          key={i}
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            ...textSpring,
+                            delay: 0.04 + i * 0.018,
+                          }}
+                          className="inline-block mr-[0.25em]"
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
+                    </motion.p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          );
+        })}
+      </div>
+    </>
   );
 }
