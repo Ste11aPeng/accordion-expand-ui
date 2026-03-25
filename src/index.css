@@ -100,7 +100,7 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
-    cursor: none;
+    cursor: none !important;
   }
 
   body {
@@ -113,10 +113,9 @@ All colors MUST be HSL.
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: hsla(0, 0%, 100%, 0.5);
+  background: hsl(0, 0%, 100%);
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s ease;
-  mix-blend-mode: difference;
+  box-shadow: 0 0 8px hsla(0, 0%, 100%, 0.4);
 }
