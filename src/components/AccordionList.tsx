@@ -12,7 +12,7 @@ interface AccordionItem {
 const items: AccordionItem[] = [
   {
     id: "interaction",
-    icon: <Wifi className="w-5 h-5 text-muted-foreground" />,
+    icon: <MousePointerClick className="w-5 h-5 text-muted-foreground" />,
     title: "What is Interaction Design?",
     description:
       "Interaction design focuses on creating engaging interfaces with well-thought-out behaviors, making the experience intuitive and delightful.",
