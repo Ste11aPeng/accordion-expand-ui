@@ -121,7 +121,7 @@ export default function AccordionList() {
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                     exit={{ y: -4, opacity: 0, filter: "blur(4px)" }}
                     transition={{ ...textSpring, delay: 0.05 }}
-                    className="px-5 pb-4 pt-0 text-[14px] leading-relaxed text-muted-foreground"
+                    className="px-5 pb-4 pt-0 text-[14px] leading-snug text-muted-foreground"
                   >
                     {item.description.split(" ").map((word, i) => (
                       <motion.span
