@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MousePointerClick, Layers, Hand, Send, Radio } from "lucide-react";
+import { Timer, LayoutGrid, MousePointer, ScanEye, Scaling } from "lucide-react";
 
 interface AccordionItem {
   id: string;
@@ -11,39 +11,39 @@ interface AccordionItem {
 
 const items: AccordionItem[] = [
   {
-    id: "interaction",
-    icon: <MousePointerClick className="w-5 h-5 text-muted-foreground" />,
-    title: "What is Interaction Design?",
+    id: "fitts",
+    icon: <MousePointer className="w-5 h-5 text-muted-foreground" />,
+    title: "Fitts's Law",
     description:
-      "Interaction design focuses on creating engaging interfaces with well-thought-out behaviors, making the experience intuitive and delightful.",
+      "The time to acquire a target is a function of the distance to and size of the target. Make interactive elements large and place them in easily accessible areas.",
   },
   {
-    id: "principles",
-    icon: <Layers className="w-5 h-5 text-muted-foreground" />,
-    title: "Principles & Patterns",
+    id: "hick",
+    icon: <Timer className="w-5 h-5 text-muted-foreground" />,
+    title: "Hick's Law",
     description:
-      "Design principles provide a foundation of best practices, while patterns offer reusable solutions to common interaction challenges.",
+      "The time it takes to make a decision increases with the number and complexity of choices. Simplify choices to reduce cognitive load.",
   },
   {
-    id: "accessibility",
-    icon: <Hand className="w-5 h-5 text-muted-foreground" />,
-    title: "Usability & Accessibility",
+    id: "miller",
+    icon: <LayoutGrid className="w-5 h-5 text-muted-foreground" />,
+    title: "Miller's Law",
     description:
-      "Focusing on making digital designs easy to use and accessible for everyone, including those with disabilities.",
+      "The average person can only keep about 7 (±2) items in their working memory. Chunk information into manageable groups.",
   },
   {
-    id: "prototyping",
-    icon: <Send className="w-5 h-5 text-muted-foreground" />,
-    title: "Prototyping & Testing",
+    id: "gestalt",
+    icon: <ScanEye className="w-5 h-5 text-muted-foreground" />,
+    title: "Law of Proximity",
     description:
-      "Building interactive prototypes to validate ideas early, gather feedback, and iterate toward a polished final product.",
+      "Objects that are near each other tend to be grouped together. Use spatial relationships to indicate related content and hierarchy.",
   },
   {
-    id: "optimisation",
-    icon: <Radio className="w-5 h-5 text-muted-foreground" />,
-    title: "UX Optimisation",
+    id: "aesthetic",
+    icon: <Scaling className="w-5 h-5 text-muted-foreground" />,
+    title: "Aesthetic-Usability Effect",
     description:
-      "Continuously refining the user experience through data analysis, A/B testing, and user research to maximise engagement.",
+      "Users often perceive aesthetically pleasing designs as more usable. Good visual design creates a positive response and increases tolerance for minor issues.",
   },
 ];
 
