@@ -10,6 +10,17 @@ const Index = () => {
         Fundamental principles that shape user experience design
       </p>
       <AccordionList />
+      <div className="fixed bottom-4 left-4 text-xs text-muted-foreground">
+        Designed by{" "}
+        <a
+          href="https://ruocanpeng.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-foreground transition-colors"
+        >
+          Stella P
+        </a>
+      </div>
     </div>
   );
 };
